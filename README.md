@@ -1,5 +1,5 @@
 # Interviewer
-* 면접관을 위한 App
+* 면접관을 위한 App.
 * Demo: https://kis6905.github.io/interview-helper-front-release/
 
 ## 기술스택
