@@ -26,10 +26,4 @@ public class QuestionSetController {
 		return ResponseEntity.ok(Response.createSuccess(quesetionSetList));
 	}
 	
-	@GetMapping("/test")
-	public ResponseEntity<Response> test() {
-		List<QuestionSetDto> quesetionSetList = questionSetService.getQuestionSetList(1L);
-		return ResponseEntity.ok(Response.createSuccess(quesetionSetList));
-	}
-	
 }
