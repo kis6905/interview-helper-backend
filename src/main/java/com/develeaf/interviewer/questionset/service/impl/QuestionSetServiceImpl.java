@@ -1,6 +1,6 @@
 package com.develeaf.interviewer.questionset.service.impl;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +22,14 @@ public class QuestionSetServiceImpl implements QuestionSetService {
 	
 	@Override
 	public List<QuestionSetDto> getQuestionSetList(Long companySeq) {
-		List<Long> ids = new ArrayList<Long>();
-		ids.add(companySeq);
-		List<QuestionSetEntity> list = questionSetRepository.findAllById(ids);
+		List<QuestionSetEntity> list = questionSetRepository.findAllById(Arrays.asList(companySeq));
 		
 		log.info("list: {}", list);
 		
 		// TODO: convert dto
+		String todo;
 		
 		return null;
 	}
-
+	
 }
