@@ -1,7 +1,9 @@
 package com.develeaf.interviewer.common.view;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Data
 public class Response {
 	
@@ -26,12 +28,14 @@ public class Response {
 	public Response(Result result) {
 		this.resultCode = result.code;
 		this.resultMessage = result.message;
+		log(this);
 	}
 	
 	public Response(Result result, Object data) {
 		this.resultCode = result.code;
 		this.resultMessage = result.message;
 		this.data = data;
+		log(this);
 	}
 	
 	public static Response createSuccess() {
@@ -48,6 +52,14 @@ public class Response {
 	
 	public static Response createResponse(Result result, Object data) {
 		return new Response(result, data);
+	}
+	
+	private static void log(Response response) {
+		if (log.isDebugEnabled()) {
+			log.debug("## resultCode   : {}", response.getResultCode());
+			log.debug("## resultMessage: {}", response.getResultMessage());
+			log.debug("## data         : {}", response.getData());
+		}
 	}
 	
 }
