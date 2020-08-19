@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Data
-public class Response {
+public class Response<T> {
 	
 	enum Result {
 		SUCCESS("0000", "ok");
@@ -20,7 +20,7 @@ public class Response {
 	
 	private String resultCode;
 	private String resultMessage;
-	private Object data;
+	private T data;
 	
 	public Response() {
 	}
@@ -31,30 +31,30 @@ public class Response {
 		log(this);
 	}
 	
-	public Response(Result result, Object data) {
+	public Response(Result result, T data) {
 		this.resultCode = result.code;
 		this.resultMessage = result.message;
 		this.data = data;
 		log(this);
 	}
 	
-	public static Response createSuccess() {
-		return new Response(Result.SUCCESS);
+	public static <T> Response<T> createSuccess() {
+		return new Response<T>(Result.SUCCESS);
 	}
 	
-	public static Response createSuccess(Object data) {
-		return new Response(Result.SUCCESS, data);
+	public static <T> Response<T> createSuccess(T data) {
+		return new Response<T>(Result.SUCCESS, data);
 	}
 	
-	public static Response createResponse(Result result) {
-		return new Response(result);
+	public static Response<?> createResponse(Result result) {
+		return new Response<>(result);
 	}
 	
-	public static Response createResponse(Result result, Object data) {
-		return new Response(result, data);
+	public static <T> Response<T> createResponse(Result result, T data) {
+		return new Response<T>(result, data);
 	}
 	
-	private static void log(Response response) {
+	private static void log(Response<?> response) {
 		if (log.isDebugEnabled()) {
 			log.debug("## resultCode   : {}", response.getResultCode());
 			log.debug("## resultMessage: {}", response.getResultMessage());

@@ -29,5 +29,12 @@ public class QuestionSetServiceImpl implements QuestionSetService {
 				.map((entity) -> QuestionSetDto.of(entity, modelMapper))
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public QuestionSetDto registQuestionSet(QuestionSetDto questionSetDto) {
+		QuestionSetEntity entity = QuestionSetEntity.of(questionSetDto, modelMapper);
+		entity = questionSetRepository.save(QuestionSetEntity.of(questionSetDto, modelMapper));
+		return QuestionSetDto.of(entity, modelMapper);
+	}
 	
 }

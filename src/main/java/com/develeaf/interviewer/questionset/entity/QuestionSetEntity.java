@@ -11,10 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import com.develeaf.interviewer.company.entity.CompanyEntity;
+import com.develeaf.interviewer.questionset.dto.QuestionSetDto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,5 +53,10 @@ public class QuestionSetEntity {
 	@ManyToOne
 	@JoinColumn(name = "company_seq")
 	private CompanyEntity company;
+	
+	public static QuestionSetEntity of(QuestionSetDto dto, ModelMapper modelMapper) {
+		// TODO
+		return null;
+	}
 	
 }

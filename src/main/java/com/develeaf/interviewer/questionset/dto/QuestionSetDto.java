@@ -30,11 +30,10 @@ public class QuestionSetDto extends CommonDto {
 	private String modifiedDate;
 	
 	public static QuestionSetDto of(QuestionSetEntity entity, ModelMapper modelMapper) {
-		ObjectMapper objectMapper = new ObjectMapper();
-		
 		QuestionSetDto dto = modelMapper.map(entity, QuestionSetDto.class);
 		if (entity.getQuestionListJson() != null) {
 			try {
+				ObjectMapper objectMapper = new ObjectMapper();
 				dto.setQuestionList(objectMapper.readValue(entity.getQuestionListJson(), new TypeReference<List<QuestionDto>>() {}));
 			} catch (JsonProcessingException e) {
 				log.error(StringUtils.EMPTY, e);

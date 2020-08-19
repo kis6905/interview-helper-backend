@@ -7,5 +7,6 @@ import com.develeaf.interviewer.questionset.dto.QuestionSetDto;
 public interface QuestionSetService {
 	
 	List<QuestionSetDto> getQuestionSetList(Long companySeq);
+	QuestionSetDto registQuestionSet(QuestionSetDto questionSetDto);
 	
 }
