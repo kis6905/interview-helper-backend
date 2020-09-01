@@ -25,6 +25,7 @@ public class QuestionSetDto extends CommonDto {
 	private Long seq;
 	private String setName;
 	private String author;
+	private String companySeq;
 	private List<QuestionDto> questionList;
 	private String registeredDate;
 	private String modifiedDate;

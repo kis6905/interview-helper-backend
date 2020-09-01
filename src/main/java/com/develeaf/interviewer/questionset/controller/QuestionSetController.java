@@ -29,7 +29,8 @@ public class QuestionSetController {
 	
 	@PostMapping("/{companySeq}")
 	public Response<QuestionSetDto> postQuestSet(@RequestBody QuestionSetDto questionSetDto) {
-		return Response.createSuccess();
+		QuestionSetDto dto = questionSetService.registQuestionSet(questionSetDto);
+		return Response.createSuccess(dto);
 	}
 	
 }

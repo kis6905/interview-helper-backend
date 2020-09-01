@@ -4,10 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.develeaf.interviewer.common.utils.DateUtil;
+import com.develeaf.interviewer.company.entity.CompanyEntity;
+import com.develeaf.interviewer.company.repository.CompanyRepository;
 import com.develeaf.interviewer.questionset.dto.QuestionSetDto;
 import com.develeaf.interviewer.questionset.entity.QuestionSetEntity;
 import com.develeaf.interviewer.questionset.repository.QuestionSetRepository;
@@ -18,6 +23,9 @@ public class QuestionSetServiceImpl implements QuestionSetService {
 	
 	@Autowired
 	private QuestionSetRepository questionSetRepository;
+	
+	@Autowired
+	private CompanyRepository companyRepository;
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -31,9 +39,14 @@ public class QuestionSetServiceImpl implements QuestionSetService {
 	}
 
 	@Override
+	@Transactional
 	public QuestionSetDto registQuestionSet(QuestionSetDto questionSetDto) {
 		QuestionSetEntity entity = QuestionSetEntity.of(questionSetDto, modelMapper);
-		entity = questionSetRepository.save(QuestionSetEntity.of(questionSetDto, modelMapper));
+		CompanyEntity company = companyRepository.findById(Long.parseLong(questionSetDto.getCompanySeq())).orElse(null);
+		entity.setCompany(company);
+		entity.setRegisteredDate(DateUtil.nowLocalDateTime());
+		entity.setModifiedDate(DateUtil.nowLocalDateTime());
+		entity = questionSetRepository.save(entity);
 		return QuestionSetDto.of(entity, modelMapper);
 	}
 	
